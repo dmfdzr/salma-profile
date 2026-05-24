@@ -20,24 +20,25 @@ export function ReviewsSection() {
   }, [page])
 
   return (
-    <div className="grid h-full min-h-136 grid-rows-[auto_1fr_auto] gap-4">
-      <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+    <div className="flex h-full min-h-0 flex-col gap-4">
+      <div className="shrink-0 md:flex md:items-end md:justify-between md:gap-4">
         <div className="max-w-2xl">
           <p className="text-sm font-black uppercase text-[#c92865] dark:text-[#ff9bbb]">Reviewed places</p>
-          <h2 className="mt-3 text-3xl font-black text-[#311925] dark:text-white sm:text-5xl">20 Jogja reviews, 5 per page.</h2>
+          <h2 className="mt-3 text-2xl font-black text-[#311925] dark:text-white sm:text-5xl">20 Jogja reviews, 5 per page.</h2>
         </div>
-        <p className="max-w-md leading-7 text-[#6b4c5d] dark:text-[#f6dce5]">
+        <p className="mt-3 max-w-md text-sm leading-6 text-[#6b4c5d] dark:text-[#f6dce5] md:mt-0 md:text-base md:leading-7">
           Click each review to see menu highlights, budget, vibe, best-for notes, and brand insight.
         </p>
       </div>
 
-      <div className="grid min-h-0 gap-3 overflow-y-auto pr-1">
+      <div className="grid min-h-0 flex-1 content-start gap-3 overflow-y-auto pb-2 pr-1">
         {pagedReviews.map((review) => (
           <ReviewDialog key={review.name} review={review} />
         ))}
       </div>
 
-      <div className="flex items-center justify-between gap-3 rounded-full border border-[#f3d4de] bg-white/75 p-2 dark:border-white/10 dark:bg-white/8">
+      <div className="shrink-0 rounded-[1.25rem] border border-[#f3d4de] bg-white/75 p-2 dark:border-white/10 dark:bg-white/8 sm:rounded-full">
+        <div className="flex items-center justify-between gap-2">
         <Button
           type="button"
           variant="outline"
@@ -47,7 +48,7 @@ export function ReviewsSection() {
           className="border-[#e9a7bb] bg-white text-[#4d2a3a] hover:bg-[#fff1f5] dark:border-white/10 dark:bg-white/8 dark:text-white dark:hover:bg-white/14"
         >
           <IconChevronLeft className="size-4" aria-hidden="true" />
-          Previous
+          <span className="hidden sm:inline">Previous</span>
         </Button>
         <p className="text-sm font-black text-[#7a5968] dark:text-[#f6dce5]">
           Page {page} / {totalPages}
@@ -60,9 +61,10 @@ export function ReviewsSection() {
           onClick={() => setPage((current) => Math.min(totalPages, current + 1))}
           className="border-[#e9a7bb] bg-white text-[#4d2a3a] hover:bg-[#fff1f5] dark:border-white/10 dark:bg-white/8 dark:text-white dark:hover:bg-white/14"
         >
-          Next
+          <span className="hidden sm:inline">Next</span>
           <IconChevronRight className="size-4" aria-hidden="true" />
         </Button>
+        </div>
       </div>
     </div>
   )
@@ -96,25 +98,29 @@ function ReviewDialog({ review }: { review: Review }) {
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-50 bg-[#160b12]/70 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0" />
-        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 grid max-h-[88dvh] w-[min(92vw,56rem)] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[2rem] border border-[#f3d4de] bg-white shadow-2xl shadow-black/25 outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95 dark:border-white/10 dark:bg-[#21111a]">
+        <Dialog.Content
+          onEscapeKeyDown={(event) => event.preventDefault()}
+          onPointerDownOutside={(event) => event.preventDefault()}
+          className="fixed left-1/2 top-1/2 z-50 grid max-h-[88dvh] w-[min(92vw,56rem)] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[2rem] border border-[#f3d4de] bg-white shadow-2xl shadow-black/25 outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95 dark:border-white/10 dark:bg-[#21111a]"
+        >
+          <Dialog.Close asChild>
+            <button
+              type="button"
+              className="absolute right-4 top-4 z-10 grid size-10 shrink-0 place-items-center rounded-full border border-[#e9a7bb] bg-white text-[#4d2a3a] shadow-lg shadow-black/10 transition hover:bg-[#fff1f5] focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#f35b8f]/40 dark:border-white/10 dark:bg-[#2c1824] dark:text-white dark:hover:bg-[#3a2130]"
+              aria-label="Close review detail"
+            >
+              <IconX className="size-5" aria-hidden="true" />
+            </button>
+          </Dialog.Close>
           <div className="grid max-h-[88dvh] overflow-y-auto lg:grid-cols-[0.95fr_1.05fr]">
             <Image src={review.image} alt={`${review.name} full detail visual`} width={1100} height={900} className="h-72 w-full object-cover lg:h-full" />
-            <div className="p-6 sm:p-8">
-              <div className="flex items-start justify-between gap-4">
+            <div className="p-6 pt-16 sm:p-8 sm:pt-16">
+              <div>
                 <div>
                   <p className="text-sm font-black uppercase text-[#c92865] dark:text-[#ff9bbb]">{review.category}</p>
                   <Dialog.Title className="mt-2 text-3xl font-black text-[#311925] dark:text-white">{review.name}</Dialog.Title>
                   <Dialog.Description className="mt-3 leading-7 text-[#6b4c5d] dark:text-[#f6dce5]">{review.note}</Dialog.Description>
                 </div>
-                <Dialog.Close asChild>
-                  <button
-                    type="button"
-                    className="grid size-10 shrink-0 place-items-center rounded-full border border-[#e9a7bb] bg-white text-[#4d2a3a] transition hover:bg-[#fff1f5] focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#f35b8f]/40 dark:border-white/10 dark:bg-white/8 dark:text-white dark:hover:bg-white/14"
-                    aria-label="Close review detail"
-                  >
-                    <IconX className="size-5" aria-hidden="true" />
-                  </button>
-                </Dialog.Close>
               </div>
 
               <div className="mt-6 grid gap-3 sm:grid-cols-2">
