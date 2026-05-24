@@ -101,12 +101,12 @@ export default function Page() {
       <div className="relative isolate flex h-full flex-col px-4 py-4 sm:px-6 lg:px-8">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_12%_12%,rgba(255,192,203,0.75),transparent_26%),radial-gradient(circle_at_90%_8%,rgba(255,232,166,0.55),transparent_24%),linear-gradient(135deg,#fff7f9_0%,#fff1f5_48%,#f8fff8_100%)]" />
 
-        <header className="mx-auto flex w-full max-w-7xl shrink-0 flex-col gap-3 rounded-[1.75rem] border border-white/80 bg-white/72 p-3 shadow-sm backdrop-blur md:flex-row md:items-center md:justify-between">
+        <header className="mx-auto flex w-full max-w-7xl shrink-0 flex-col gap-3 rounded-[1.75rem] border border-white/80 bg-white/70 p-3 shadow-sm backdrop-blur md:flex-row md:items-center md:justify-between">
           <div className="flex items-center justify-between gap-4">
             <button
               type="button"
               onClick={() => setActiveSection("Home")}
-              className="flex min-h-11 items-center gap-2 rounded-full pr-3 text-left font-semibold tracking-normal outline-none transition focus-visible:ring-[3px] focus-visible:ring-[#f35b8f]/35"
+              className="flex min-h-11 items-center gap-2 rounded-full pr-3 text-left font-semibold tracking-normal outline-none transition focus-visible:ring-[3px] focus-visible:ring-[#f35b8f]/40"
               aria-label="Show home section"
             >
               <span className="grid size-10 place-items-center rounded-full bg-[#f35b8f] text-white shadow-sm">
@@ -129,7 +129,7 @@ export default function Page() {
                 type="button"
                 onClick={() => setActiveSection(section)}
                 aria-current={activeSection === section ? "page" : undefined}
-                className={`min-h-10 shrink-0 rounded-full px-4 text-sm font-black transition focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#f35b8f]/35 ${
+                className={`min-h-10 shrink-0 rounded-full px-4 text-sm font-black transition focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#f35b8f]/40 ${
                   activeSection === section
                     ? "bg-[#f35b8f] text-white shadow-sm shadow-[#f35b8f]/25"
                     : "text-[#765565] hover:bg-white hover:text-[#c92865]"
@@ -142,7 +142,7 @@ export default function Page() {
         </header>
 
         <section className="mx-auto mt-4 min-h-0 w-full max-w-7xl flex-1">
-          <div className="h-full overflow-hidden rounded-[2rem] border border-white/80 bg-white/70 shadow-2xl shadow-[#d66a8d]/15 backdrop-blur">
+          <div className="h-full overflow-hidden rounded-[2rem] border border-white/80 bg-white/70 shadow-2xl shadow-[#d66a8d]/20 backdrop-blur">
             <div className="h-full overflow-y-auto p-4 sm:p-6 lg:p-8">
               {activeSection === "Home" && <HomeSection setActiveSection={setActiveSection} />}
               {activeSection === "About" && <AboutSection />}
@@ -212,7 +212,7 @@ function HomeSection({ setActiveSection }: { setActiveSection: (section: Section
             priority
             className="h-[27rem] w-full object-cover"
           />
-          <div className="absolute inset-x-5 bottom-5 rounded-3xl border border-white/80 bg-white/82 p-4 shadow-lg backdrop-blur">
+          <div className="absolute inset-x-5 bottom-5 rounded-3xl border border-white/80 bg-white/80 p-4 shadow-lg backdrop-blur">
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="text-sm font-bold text-[#c92865]">Latest bite</p>
@@ -276,7 +276,7 @@ function ReviewsSection() {
         {reviewedPlaces.map((place) => (
           <article
             key={place.name}
-            className="group overflow-hidden rounded-[1.5rem] border border-[#f3d4de] bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#e7789c]/15"
+            className="group overflow-hidden rounded-[1.5rem] border border-[#f3d4de] bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#e7789c]/20"
           >
             <div className="grid gap-0 sm:grid-cols-[0.82fr_1.18fr]">
               <Image
@@ -315,7 +315,7 @@ function ReviewsSection() {
 function CollabSection() {
   return (
     <div className="grid h-full min-h-[34rem] gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
-      <div className="rounded-[1.75rem] bg-[#311925] p-6 text-white shadow-xl shadow-[#311925]/15 sm:p-8">
+      <div className="rounded-[1.75rem] bg-[#311925] p-6 text-white shadow-xl shadow-[#311925]/20 sm:p-8">
         <p className="text-sm font-black uppercase text-[#ff9bbb]">For brands</p>
         <h2 className="mt-3 text-3xl font-black sm:text-5xl">Collab that still feels like a real recommendation.</h2>
         <p className="mt-5 leading-8 text-[#f6dce5]">
